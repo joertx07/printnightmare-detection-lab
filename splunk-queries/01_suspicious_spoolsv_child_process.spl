@@ -1,0 +1,15 @@
+index=sysmon EventCode=1
+| eval ParentImage=lower(ParentImage)
+| eval Image=lower(Image)
+| where like(ParentImage, "%spoolsv.exe")
+      AND (like(Image, "%cmd.exe")
+       OR like(Image, "%powershell.exe")
+       OR like(Image, "%wscript.exe")
+       OR like(Image, "%cscript.exe")
+       OR like(Image, "%rundll32.exe")
+       OR like(Image, "%regsvr32.exe")
+       OR like(Image, "%mshta.exe")
+       OR like(Image, "%whoami.exe")
+       OR like(Image, "%net.exe"))
+| table _time, Computer, User, Image, ParentImage, CommandLine, Hashes
+| sort - _time
