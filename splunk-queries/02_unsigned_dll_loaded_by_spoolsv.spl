@@ -1,0 +1,6 @@
+index=sysmon EventCode=7
+| eval Image=lower(Image)
+| where like(Image, "%spoolsv.exe")
+      AND (Signed="false" OR Signed="")
+| table _time, Computer, Image, ImageLoaded, Signed, SignatureStatus, Hashes
+| sort - _time
