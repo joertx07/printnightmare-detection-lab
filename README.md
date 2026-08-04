@@ -27,12 +27,10 @@ printnightmare-detection-lab/
 │   ├── 01_suspicious_spoolsv_child_process.spl
 │   ├── 02_unsigned_dll_loaded_by_spoolsv.spl
 │   └── 03_dll_written_to_spool_driver_path.spl
-├── dashboards/
-│   ├── dashboard_overview1.png
-│   └── dashboard_overview2.png
 ├── screenshots/
-│   ├── 01_sysmon_event_viewer.png
-│   ├── 02_splunk_data_ingestion.png
+│   ├── 01_splunk_data_ingestion.png
+│   ├── 02_dashboard_overview.png
+│   ├── 03_dashboard_overview.png
 │   └── 04_atomic_red_team_execution.png
 ├── incident-report/
 │   └── IR_Report_PrintNightmare.pdf
