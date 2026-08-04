@@ -1,0 +1,5 @@
+index=sysmon EventCode=11
+| where like(lower(TargetFilename), "%\\spool\\drivers\\%")
+      AND like(lower(TargetFilename), "%.dll")
+| table _time, Computer, Image, TargetFilename, CreationUtcTime
+| sort - _time
