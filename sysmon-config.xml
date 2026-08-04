@@ -1,0 +1,49 @@
+<Sysmon schemaversion="4.90">
+  <HashAlgorithms>md5,sha256,IMPHASH</HashAlgorithms>
+  <CheckRevocation/>
+
+  <EventFiltering>
+
+    <!-- EVENT ID 1: Process Create -->
+    <!-- Capture all process creation events -->
+    <!-- INCLUDE all by default, then EXCLUDE known noise -->
+    <RuleGroup name="" groupRelation="or">
+      <ProcessCreate onmatch="exclude">
+        <!-- Exclude noisy but benign Windows processes -->
+        <Image condition="is">C:\Windows\System32\wermgr.exe</Image>
+        <Image condition="is">C:\Windows\System32\conhost.exe</Image>
+        <ParentImage condition="is">C:\Windows\System32\svchost.exe</ParentImage>
+      </ProcessCreate>
+    </RuleGroup>
+
+    <!-- EVENT ID 3: Network Connection -->
+    <RuleGroup name="" groupRelation="or">
+      <NetworkConnect onmatch="include">
+        <!-- Flag outbound SMB from spoolsv.exe (port 445) -->
+        <Image condition="is">C:\Windows\System32\spoolsv.exe</Image>
+        <!-- Flag any process connecting to port 445 externally -->
+        <DestinationPort condition="is">445</DestinationPort>
+      </NetworkConnect>
+    </RuleGroup>
+
+    <!-- EVENT ID 7: Image/DLL Loaded -->
+    <RuleGroup name="" groupRelation="or">
+      <ImageLoad onmatch="include">
+        <!-- Flag all DLL loads by spoolsv.exe -->
+        <Image condition="is">C:\Windows\System32\spoolsv.exe</Image>
+        <!-- Flag unsigned DLLs loaded by any process -->
+        <Signed condition="is">false</Signed>
+      </ImageLoad>
+    </RuleGroup>
+
+    <!-- EVENT ID 11: File Created -->
+    <RuleGroup name="" groupRelation="or">
+      <FileCreate onmatch="include">
+        <!-- Flag DLL files created in Windows spool driver path -->
+        <TargetFilename condition="contains">\spool\drivers\</TargetFilename>
+        <TargetFilename condition="end with">.dll</TargetFilename>
+      </FileCreate>
+    </RuleGroup>
+
+  </EventFiltering>
+</Sysmon>
