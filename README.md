@@ -1,6 +1,6 @@
 # PrintNightmare Threat Detection & Incident Response Lab (CVE-2021-34527)
 
-## 📌 Executive Overview
+## 📌 Overview
 This project documents an end-to-end security monitoring, detection engineering, and incident response implementation targeting **PrintNightmare (CVE-2021-34527)**. PrintNightmare is a critical vulnerability in the Windows Print Spooler service (`spoolsv.exe`) that permits unauthenticated remote code execution (RCE) and local privilege escalation (LPE) to `SYSTEM` privileges.
 
 The goal of this lab was to simulate exploitation telemetry, capture kernel and system audit logs via **Sysmon** and **Windows Security Event Logs**, ingest events into **Splunk Enterprise SIEM**, engineer targeted Search Processing Language (SPL) detection rules, and generate a formal Incident Response (IR) report.
