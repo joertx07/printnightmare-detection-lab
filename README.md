@@ -10,7 +10,7 @@ The goal of this lab was to simulate exploitation telemetry, capture kernel and 
 ## 🏗️ Lab Architecture & Environment
 
 * **Attacker:** Atomic Red Team Test T1547.012 with a custom DLL
-* **Victim Workstation:** Windows 10 Pro (Domain-Joined to `lab.local`)
+* **Victim Workstation:** Windows 10 Pro (Domain-Joined to `mydomain.com`)
 * **Domain Controller:** Windows Server 2019 (Active Directory DC)
 * **SIEM / Logging Pipeline:** Splunk Enterprise & Splunk Universal Forwarder
 * **Endpoint Telemetry:** Sysmon & Advanced Windows Audit Policy
